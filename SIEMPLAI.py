@@ -130,7 +130,7 @@ if openai_api_key:
                 if last_assistant_message:
                     import re
                     raw_response = last_assistant_message.content[0].text.value
-                    response_text = re.sub(r"【\\d+:\\d+†source】", "", raw_response)
+                     response_text = re.sub(r"【\d+:\d+[^】]*】", "", raw_response)
                     st.session_state[CHAT_HISTORY_KEY].append({"role": "assistant", "content": response_text})
                     st.markdown(f'<div class="assistant-bubble">🤖 {response_text}</div>', unsafe_allow_html=True)
 else:
