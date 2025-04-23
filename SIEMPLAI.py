@@ -52,12 +52,11 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.title("🔍 SIEmens Management  - Product Lifecycle Artificial Intelligence ")
+st.markdown("<h3 style='font-size:24px;'>🔍 SIEmens Management  - Product Lifecycle Artificial Intelligence</h3>", unsafe_allow_html=True)
 
 
 # Sidebar para chave e botão de reset
 with st.sidebar:
-    
     openai_api_key = st.text_input("🔑 OpenAI API Key", type="password")
     if st.button("🧹 Limpar histórico"):
         st.session_state[CHAT_HISTORY_KEY] = []
@@ -84,9 +83,15 @@ if openai_api_key:
         user_input = st.chat_input("Digite sua pergunta ao SIEMPLAI...")
 
     if user_input:
+        import streamlit.components.v1 as components
         st.session_state[CHAT_HISTORY_KEY].append({"role": "user", "content": user_input})
+        components.html("""
+        <script>
+            window.scrollTo(0, document.body.scrollHeight);
+        </script>
+        """, height=0)
         with chat_placeholder:
-            st.markdown(f'<div class="user-bubble"> {user_input} 👤</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="user-bubble">{user_input} 👤</div>', unsafe_allow_html=True)
 
         with chat_placeholder:
             with st.spinner("🔎 Buscando resposta..."):
@@ -125,7 +130,7 @@ if openai_api_key:
                 if last_assistant_message:
                     import re
                     raw_response = last_assistant_message.content[0].text.value
-                    response_text = re.sub(r"【\d+:\d+†source】", "", raw_response)
+                    response_text = re.sub(r"【\\d+:\\d+†source】", "", raw_response)
                     st.session_state[CHAT_HISTORY_KEY].append({"role": "assistant", "content": response_text})
                     st.markdown(f'<div class="assistant-bubble">🤖 {response_text}</div>', unsafe_allow_html=True)
 else:
