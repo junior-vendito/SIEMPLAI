@@ -91,7 +91,7 @@ if openai_api_key:
         </script>
         """, height=0)
         with chat_placeholder:
-            st.markdown(f'<div class="user-bubble">{user_input} 👤</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="user-bubble">👤 {user_input}</div>', unsafe_allow_html=True)
 
         with chat_placeholder:
             with st.spinner("🔎 Buscando resposta..."):
