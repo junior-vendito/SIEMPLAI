@@ -62,6 +62,14 @@ with st.sidebar:
         st.session_state[CHAT_HISTORY_KEY] = []
         st.rerun()
 
+    st.markdown("""
+    <hr>
+    <p style='font-size: 14px;'>❓ <strong>Não sabe como gerar sua própria chave da OpenAI?</strong></p>
+    <p style='font-size: 13px;'>Clique no botão abaixo e veja um tutorial explicando como criar sua API key gratuitamente e usá-la neste app.</p>
+    """, unsafe_allow_html=True)
+    if st.button("📺 Assistir tutorial no YouTube"):
+        st.markdown("<script>window.open('https://www.youtube.com/watch?v=Y9gOf4we3tk', '_blank')</script>", unsafe_allow_html=True)
+
 if openai_api_key:
     client = OpenAI(api_key=openai_api_key)
 
